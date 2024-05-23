@@ -58,7 +58,6 @@ def index_to_threshold(rows: list[dict[str, str]], column: str, threshold: Union
     column (str): 対象カラム名
     threshold (T): 閾値
     """
-    found = False
     index = 0
 
     for index, row in enumerate(rows):
@@ -72,10 +71,8 @@ def index_to_threshold(rows: list[dict[str, str]], column: str, threshold: Union
             raise NotImplementedError
 
         if current > threshold:
-            found = True
             break
-
-    if not found:
+    else:
         index += 1
 
     return index
@@ -103,12 +100,10 @@ def index_on_threshold(rows: list[dict[str, str]], column: str, threshold: Union
     else:
         raise NotImplementedError
 
-    found = False
     index = 0
 
     for index, row in enumerate(rows):
         if prev > threshold:
-            found = True
             break
 
         if isinstance(threshold, int):
@@ -117,8 +112,7 @@ def index_on_threshold(rows: list[dict[str, str]], column: str, threshold: Union
             prev = float(row[column])
         else:
             raise NotImplementedError
-
-    if not found:
+    else:
         index += 1
 
     return index

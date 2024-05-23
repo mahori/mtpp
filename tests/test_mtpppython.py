@@ -13,15 +13,13 @@ def python_call_function(rows: list[dict[str, str]]) -> list[dict[str, str]]:
         prefectures[prefecture].append(row)
 
     for prefecture, values in prefectures.items():
-        found = False
         index = 0
         prev = 0
         for index, value in enumerate(values):
             if prev > 100:
-                found = True
                 break
             prev = int(value["カラム1"])
-        if not found:
+        else:
             index += 1
         del values[index:]
 
